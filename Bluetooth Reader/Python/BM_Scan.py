@@ -144,7 +144,11 @@ for dev in devices:
             print ("{} = {}".format(desc, value))
 
             # Trap for the BroodMinder ID
-            if (desc == "Complete Local Name"):
-                deviceId = value
+            #if (desc == "Complete Local Name"):
+            #    deviceId = value
 
-        extractData(deviceId, dev.getValueText(255))
+    deviceId = str(dev.addr)
+	deviceId = deviceId[-8:]
+	deviceId = deviceId.upper()	
+    
+    extractData(deviceId, dev.getValueText(255))
