@@ -148,7 +148,7 @@ for dev in devices:
             #    deviceId = value
 
     deviceId = str(dev.addr)
-	deviceId = deviceId[-8:]
-	deviceId = deviceId.upper()	
+    deviceId = deviceId[-8:]
+    deviceId = deviceId.upper()	
     
     extractData(deviceId, dev.getValueText(255))
