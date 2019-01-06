@@ -22,6 +22,8 @@ __version__ = "1.0"
 ## devices that show up in a BLE scan.
 ## Note I am using an unpublished API call to upload data with this code.
 ##
+## TKunchick Sun, Jan 06, 2019
+## add catch for mybroodminder.com being down and error thrown by urllib2
 
 from bluepy.btle import Scanner, DefaultDelegate
 import urllib2
@@ -101,8 +103,11 @@ def extractData(deviceId, data):
             batteryPercent)
         print url_string
 
-        contents = urllib2.urlopen(url_string).read()
-    else:
+		#contents = urllib2.urlopen(url_string).read()
+		try: contents = urllib2.urlopen(url_string).read()
+		except urllib2.URLError as e:
+			print e.reason
+        else:
         # We do not have a valid weight.
         print("TemperatureF = {}, Humidity = {}, Battery = {}".format(temperatureDegreesF, humidityPercent,
                                                                       batteryPercent))
@@ -113,8 +118,11 @@ def extractData(deviceId, data):
             batteryPercent)
         print url_string
 
-        contents = urllib2.urlopen(url_string).read()
-
+		#contents = urllib2.urlopen(url_string).read()
+		try: contents = urllib2.urlopen(url_string).read()
+		except urllib2.URLError as e:
+			print e.reason
+    
     print("-----------------------------------------------------------------------------")
 
 
