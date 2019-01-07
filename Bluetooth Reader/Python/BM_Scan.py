@@ -24,6 +24,7 @@ __version__ = "1.0"
 ##
 ## TKunchick Sun, Jan 06, 2019
 ## add catch for mybroodminder.com being down and error thrown by urllib2
+## added 5 second time out on URL try.
 
 from bluepy.btle import Scanner, DefaultDelegate
 import urllib2
@@ -102,11 +103,11 @@ def extractData(deviceId, data):
             weightScaledTotal) + "&battery_charge=" + str(
             batteryPercent)
         print url_string
-
-		#contents = urllib2.urlopen(url_string).read()
-		try: contents = urllib2.urlopen(url_string).read()
-		except urllib2.URLError as e:
-			print e.reason
+	
+	#contents = urllib2.urlopen(url_string).read()
+	try: contents = urllib2.urlopen(url_string, "",5).read()
+	except urllib2.URLError as e:
+		print e.reason
         else:
         # We do not have a valid weight.
         print("TemperatureF = {}, Humidity = {}, Battery = {}".format(temperatureDegreesF, humidityPercent,
@@ -117,11 +118,11 @@ def extractData(deviceId, data):
             temperatureDegreesF) + "&humidity=" + str(humidityPercent) + "&battery_charge=" + str(
             batteryPercent)
         print url_string
-
-		#contents = urllib2.urlopen(url_string).read()
-		try: contents = urllib2.urlopen(url_string).read()
-		except urllib2.URLError as e:
-			print e.reason
+	
+	#contents = urllib2.urlopen(url_string).read()
+	try: contents = urllib2.urlopen(url_string, "", 5).read()
+	except urllib2.URLError as e:
+		print e.reason
     
     print("-----------------------------------------------------------------------------")
 
